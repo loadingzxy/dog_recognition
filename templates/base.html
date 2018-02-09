@@ -1,0 +1,150 @@
+﻿
+<!doctype html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="最好用的文件及时分享系统">
+        <meta name="Keywords" content="文件及时分享,网盘,云盘">
+        <title>我上传的文件 - 文件及时分享</title>
+        <!-- Theme -->
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/static/css/animate.min.css" />
+        <link rel="stylesheet" href="/static/css/vegas.min.css" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <link rel="stylesheet" href="/static/css/style2.css" />
+	<link rel="shortcut icon" href="/static/img/tz.ico" type="image/x-icon"/>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_xtmtjsdjlmc84cxr.css">
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_k8psy17rqdoyldi.css">
+</head>
+<body>
+
+    <div class="popup-window">
+        <div id="shade">
+            <div class="shade-container">
+                <div class="stick stick-1"></div>
+                <div class="stick stick-2"></div>
+                <div class="stick stick-3"></div>
+            </div>
+            <div class="col-xs-12">
+                <p class="text-info">testing</p>
+            </div>
+            <span id="ok">确定</span>
+        </div>
+    </div><!-- 遮罩层 -->
+    <!--<div class="page-loader"></div>&lt;!&ndash; 循环进度条读取网页 &ndash;&gt;-->
+    <!--<span id="h-animate" class="wow zoomInLeft" data-wow-delay="2s">&#10084;</span>&lt;!&ndash; 开场 心 效果 &ndash;&gt;-->
+<!--===== Begin Header =====-->
+
+<!--===== END Advertisement =====-->
+
+
+<header>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-6">
+{#                <div class="logo wow bounceInDown" data-wow-delay="0.4s">#}
+{#                    <a class="site-logo" href="/"></a>#}
+{#                </div>#}
+            </div>
+
+            <div class="col-sm-6">
+                <div class="logo-desc wow bounceInRight" data-wow-delay="0.4s">
+                 <a href="{% url "MY" %}"> <span class="logo-desc-text" href="/"><i class="iconfont">&#xe619;</i>Manage my files</span></a>
+</div>
+            </div>
+
+        </div><!-- /.Row -->
+    </div><!-- ./container -->
+</header>
+<!--===== END Header =====-->
+
+
+
+<!--===== Begin Update File =====-->
+<section id="content">
+    <div class="container">
+
+        <div class="col-sj-12">
+
+            <!-- update-file-container -->
+            <div class="up-container wow bounceIn" data-wow-delay="0.9s">
+
+                <!-- search file -->
+                <form id="search" action="{% url "search" %}" method="get">
+                    <div class="input-box">
+                        <input id="files-info" name="kw" type="text" onkeydown="if(event.keyCode==13){return false;}" autocomplete="off" placeholder="Search File" />
+                        <span class="iconfont search-text-icon">&#xe714;</span>
+                    </div>
+                </form><!-- END search file -->
+
+                <!-- upload files -->
+                <form id="form" action="/" method="post" runat="server" enctype="multipart/form-data">
+                    <input id="files" name="file" multiple="multiple" style="display: none;" class="file-addr" type="file" />
+                  {% csrf_token %}
+                    <input id="bt" type="button" value="Upload File" />
+                </form><!-- END Upload file -->
+
+
+            </div>
+
+            <!-- show_server_list -->
+            <div class="show-file bounceIn">
+                <div class="file-title">
+                    <div class="file-name1" style="width:25%;">FileName</div>
+                    <div class="file-size" style="width:10%;">FileSize</div>
+                    <div class="file-size" style="width:10%;">Visits</div>
+                    <div class="file-date" style="width:20%;">FileDate</div>
+                    <div class="file-link" style="width:35%;">FileLink</div>
+                </div>
+                {% block content %}
+                {% endblock %}
+            </div>
+
+        </div>
+
+    </div><!-- /.container -->
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-xs-12">
+            </div>
+
+        </div><!-- /.row -->
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <h1 class="wow fadeInUp" data-wow-delay="0.4s"><span>About</span> The Desc...</h1>
+                <p class="about-text wow slideInLeft">1. Upload the file size is not more than 5M</p>
+                <p class="about-text wow slideInLeft">2. Please properly keep network backup link</p>
+            </div>
+
+        </div><!-- /.row -->
+    </div>
+</section>
+
+
+
+    <!-- ThemePlug -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/vegas.min.js"></script>
+    <script src="/static/js/wow.min.js"></script>
+    <script src="/static/js/dist/clipboard.min.js"></script>
+
+    <!-- Page -->
+    <script src="/static/js/index.js"></script>
+
+
+</body>
+</html>

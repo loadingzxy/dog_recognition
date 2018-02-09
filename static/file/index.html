@@ -1,0 +1,106 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <meta charset="UTF-8">  
+        <title></title>  
+        <link href="css/mui.css" rel="stylesheet" />  
+        <script src="js/mui.min.js"></script>  
+        
+        <script src="js/jquery.min.js"></script>  
+        <style>  
+            .imageup{ width:100px; height: 36px; line-height:36px;}  
+            .button{  width:100px; height: 50px; line-height:50px;}  
+        </style>  
+    </head>  
+    <body>  
+        <img id="headimg" src=''  height="150"  width="150">
+        <p><a href="javascript:;" class="imageup">上传图片</a> </p> 
+        <p><button onclick="upload();" class='button'> 提交</button></p>
+        <script>  
+            
+            function plusReady(){  
+                // 弹出系统选择按钮框  
+                mui("body").on("tap",".imageup",function(){  
+                    page.imgUp();  
+                })  
+                  
+            }  
+            var page=null;  
+            page={  
+                imgUp:function(){  
+                    var m=this;  
+                    plus.nativeUI.actionSheet({cancel:"取消",buttons:[  
+                        {title:"拍照"},  
+                        {title:"从相册中选择"}  
+                    ]}, function(e){//1 是拍照  2 从相册中选择  
+                        switch(e.index){  
+                            case 1:appendByCamera();break;  
+                            case 2:appendByGallery();break;  
+                        }  
+                    });  
+                }  
+                //摄像头  
+            }  
+              
+            // 拍照添加文件
+            function appendByCamera(){
+                plus.camera.getCamera().captureImage(function(e){
+                    console.log(e);
+                    plus.io.resolveLocalFileSystemURL(e, function(entry) { 
+                    var path = entry.toLocalURL(); 
+                    document.getElementById("headimg").src = path; 
+                    //就是这里www.bcty365.com 
+                    }, function(e) { 
+                        mui.toast("读取拍照文件错误：" + e.message); 
+                    }); 
+    
+                });    
+            }
+            // 从相册添加文件
+            function appendByGallery(){
+                plus.gallery.pick(function(path){
+                    document.getElementById("headimg").src = path; 
+
+                });
+            }
+            
+              
+            //服务端接口路径
+            var server = "http://123.206.184.13:8000/phone/";
+            //获取图片元素
+            var files = document.getElementById('headimg');
+            // 上传文件
+            function upload(){
+                console.log(files.src);
+                var wt=plus.nativeUI.showWaiting();
+               
+                var task=plus.uploader.createUpload(server,
+                    {method:"POST"},
+                     
+                    function(t,status){
+                    	console.log("1111");//上传完成
+                        if(status==200){
+                            alert("上传成功："+t.responseText);
+                            wt.close(); //关闭等待提示按钮
+                        }else{
+                            alert("上传失败："+status);
+                            wt.close();//关闭等待提示按钮
+                        }
+                    }
+                );
+                //添加其他参数
+                task.addData("name","test");
+                task.addFile(files.src,{key:"dddd"});
+                task.start();
+            }  
+            if(window.plus){  
+                plusReady();  
+            }else{  
+                document.addEventListener("plusready",plusReady,false);  
+            }       
+      
+        
+              
+        </script>  
+    </body>   
+</html>  

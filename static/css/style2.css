@@ -1,0 +1,51 @@
+
+
+
+/* =================================================================
+	1.// CSS
+================================================================= */
+
+
+
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2017-03-13 20:42:52
+ * @version $Id$
+ */
+
+/* ==================================================================
+    1// Advertisement
+================================================================== */
+.adver1 {
+    position: absolute;
+    top: 4px;
+    right: 50%;
+    margin-right: -114px;
+}
+.adver1 a {
+    vertical-align: bottom;
+    color: white;
+    /*text-decoration: underline;*/
+    font-size: 16px;
+}
+.adver1 a:hover {
+    color: #C14F66;
+}
+.adver1 a img{
+    vertical-align: middle;
+}
+.adver1 div {
+    padding: 5px 0;
+}
+/* ==================================================================
+    2// Phone
+================================================================== */
+@media only screen and (min-width : 767px) {
+    .adver1 {
+        right: 26px;
+        top: 40px;
+        margin: 0;
+    }
+}
